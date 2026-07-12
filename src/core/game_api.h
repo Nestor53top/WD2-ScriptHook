@@ -1,0 +1,73 @@
+#pragma once
+
+#include "core.h"
+#include "../lua/lua.h"
+
+void wd2_game_api_register_all(void);
+void wd2_game_api_init(void);
+void wd2_game_api_shutdown(void);
+
+typedef void* (__fastcall *SpawnEntity_t)(int archetypeHash, float x, float y, float z);
+typedef void  (__fastcall *SetProgression_t)(int progress);
+typedef void  (__fastcall *ShowNotification_t)(const wchar_t *text);
+typedef void  (__fastcall *CameraSetCustom_t)(float px, float py, float pz, float rx, float ry, float rz, float fov);
+typedef void  (__fastcall *GetPlayerPosition_t)(float *x, float *y, float *z);
+typedef int   (__fastcall *GetLocalPlayerEntityId_t)(void);
+typedef int   (__fastcall *SetLocalPlayerNoclip_t)(BOOL enable);
+typedef int   (__fastcall *HasLocalPlayerNoclip_t)(void);
+typedef int   (__fastcall *SetLocalPlayerFreeCamera_t)(BOOL enable);
+typedef int   (__fastcall *HasLocalPlayerFreeCamera_t)(void);
+typedef void  (__fastcall *Teleport_t)(float x, float y, float z);
+typedef void  (__fastcall *RepairVehicle_t)(int entityId);
+typedef void  (__fastcall *EnableVehicleEngine_t)(int entityId, BOOL enable);
+typedef int   (__fastcall *IsVehicleEngineEnabled_t)(int entityId);
+typedef void  (__fastcall *EnableVehicleSiren_t)(int entityId, BOOL enable);
+typedef int   (__fastcall *IsVehicleSirenEnabled_t)(int entityId);
+typedef void  (__fastcall *EnableVehicleEmergencyLight_t)(int entityId, BOOL enable);
+typedef void  (__fastcall *EnableVehicleIndicator_t)(int entityId, BOOL enable);
+typedef void  (__fastcall *EnableVehicleSpotLight_t)(int entityId, BOOL enable);
+typedef void  (__fastcall *EnableVehicleHighBeamLights_t)(int entityId, BOOL enable);
+typedef void  (__fastcall *EnableVehicleConvenienceLight_t)(int entityId, BOOL enable);
+typedef void  (__fastcall *SetVehicleLicensePlateText_t)(int entityId, const char *text);
+typedef void  (__fastcall *SetVehicleLightBehaviorFlag_t)(int entityId, int flag, BOOL enable);
+typedef int   (__fastcall *GetVehiclePartCount_t)(int entityId);
+typedef int   (__fastcall *GetVehiclePartHash_t)(int entityId, int partIndex);
+typedef void  (__fastcall *GetVehiclePartPosition_t)(int entityId, int partIndex, float *x, float *y, float *z));
+typedef void  (__fastcall *GetVehiclePartRotation_t)(int entityId, int partIndex, float *x, float *y, float *z));
+typedef void  (__fastcall *SetVehiclePartPosition_t)(int entityId, int partIndex, float x, float y, float z);
+typedef void  (__fastcall *SetVehiclePartRotation_t)(int entityId, int partIndex, float x, float y, float z);
+typedef void  (__fastcall *PutPlayerInVehicleDelayed_t)(int entityId, float delay);
+typedef int   (__fastcall *FelonyStartChase_t)(int entityId);
+typedef void  (__fastcall *ToggleFelonySystem_t)(BOOL enable);
+typedef void  (__fastcall *ClearHeatLevel_t)(void);
+typedef void  (__fastcall *SetHeatLevel_t)(int level);
+typedef void  (__fastcall *SetMinHeatLevel_t)(int level);
+typedef void  (__fastcall *SetSearchHeat_t)(int heat);
+typedef int   (__fastcall *GetGlobalTrafficLightState_t)(void);
+typedef void  (__fastcall *SetGlobalTrafficLightState_t)(int state);
+typedef void  (__fastcall *ToggleWorldImpostor_t)(BOOL enable);
+typedef void  (__fastcall *ToggleWorldSpawner_t)(BOOL enable);
+typedef int   (__fastcall *IsWorldImpostorEnabled_t)(void);
+typedef int   (__fastcall *IsWorldSpawnerEnabled_t)(void);
+typedef void  (__fastcall *SetFrameRate_t)(int fps);
+typedef int   (__fastcall *GetFrameRate_t)(void);
+typedef void  (__fastcall *DetectGameVersion_t)(void);
+typedef void  (__fastcall *RefreshKeybinds_t)(void);
+typedef void  (__fastcall *RefreshKeybind_t)(int keyId);
+typedef void  (__fastcall *PlayBroadcast_t)(int broadcastId);
+typedef void  (__fastcall *ResetBroadcastToDefault_t)(void);
+typedef void  (__fastcall *KillSplashscreen_t)(void);
+typedef int   (__fastcall *IsIngameUIEnabled_t)(void);
+typedef void  (__fastcall *SetLocalPlayerGraphicKitModel_t)(int modelId);
+typedef void  (__fastcall *SetEntityGraphicKitModel_t)(int entityId, int modelId);
+typedef int   (__fastcall *GetGraphicKitModelByEntityId_t)(int entityId);
+typedef void  (__fastcall *ForceHackIngredient_t)(int ingredientId, int count);
+typedef void  (__fastcall *ExecuteReward_V2_t)(int rewardId);
+typedef void* (__fastcall *CDominoManager_GetInstance_t)(void);
+typedef void  (__fastcall *PlaySound_t)(int soundId);
+typedef void  (__fastcall *GetAllEntities_t)(int *outIds, int *count);
+typedef void  (__fastcall *GetEntitiesInRange_t)(float x, float y, float z, float range, int *outIds, int *count);
+typedef int   (__fastcall *GetEntitiesWithComponent_t)(int componentHash, int *outIds, int maxCount);
+typedef int   (__fastcall *EntityHasComponent_t)(int entityId, int componentHash);
+typedef const char* (__fastcall *GetEntityClassName_t)(int entityId);
+typedef void  (__fastcall *GetEntityComponents_t)(int entityId, int *outHashes, int *count);

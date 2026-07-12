@@ -1,0 +1,55 @@
+name: Build ScriptHook
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/**'
+      - 'CMakeLists.txt'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+          vsversion: '2022'
+
+      - name: Setup CMake
+        uses: lukka/get-cmake@latest
+
+      - name: Build
+        run: |
+          cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release --parallel
+          
+      - name: Check outputs
+        run: |
+          dir bin\
+          echo "=== Build artifacts ==="
+          Get-ChildItem bin\ -Recurse | ForEach-Object {
+            Write-Host "  $($_.Name) ($([math]::Round($_.Length/1024, 1)) KB)"
+          }
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: WD2ScriptHook-build
+          path: |
+            bin/*.dll
+            bin/*.exe
+            bin/*.pdb
+          retention-days: 30
+
+      - name: Summary
+        run: |
+          echo "=== BUILD COMPLETE ==="
+          Get-ChildItem bin\*.dll,bin\*.exe | ForEach-Object {
+            Write-Host "$($_.Name) - $([math]::Round($_.Length/1024, 1)) KB"
+          }
