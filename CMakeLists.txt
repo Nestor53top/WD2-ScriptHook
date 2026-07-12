@@ -53,7 +53,7 @@ target_include_directories(core PRIVATE
 )
 target_compile_definitions(core PRIVATE LUA_BUILDING_LUA)
 target_link_libraries(core PRIVATE
-    d3d11 d3dcompiler dxgi dxguid shlwapi psapi dbghelp
+    d3d11 d3dcompiler dxgi dxguid shlwapi psapi dbghelp kernel32
     ws2_32 winmm version advapi32 shell32 ole32
 )
 set_target_properties(core PROPERTIES
