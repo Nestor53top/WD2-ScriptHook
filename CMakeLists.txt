@@ -7,7 +7,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 if(MSVC)
     add_compile_options(/W3 /WX- /MT /O2 /GS- /guard:cf-)
     add_compile_definitions(_CRT_SECURE_NO_WARNINGS WIN32_LEAN_AND_MEAN NDEBUG NOMINMAX)
-    add_link_options(/GUARD:CF- /NXCOMPAT /DYNAMICBASE)
+    add_link_options(/GUARD:NO /NXCOMPAT /DYNAMICBASE)
 else()
     add_compile_options(-Wall -Wextra -Wno-unused-parameter)
     add_compile_definitions(_CRT_SECURE_NO_WARNINGS WIN32_LEAN_AND_MEAN NDEBUG NOMINMAX)
@@ -87,7 +87,7 @@ add_executable(crashpad_handler WIN32
     src/crashpad/main.c
 )
 target_include_directories(crashpad_handler PRIVATE src src/crashpad)
-target_link_libraries(crashpad_handler PRIVATE shlwapi dbghelp)
+target_link_libraries(crashpad_handler PRIVATE shlwapi dbghelp psapi)
 set_target_properties(crashpad_handler PROPERTIES
     OUTPUT_NAME "crashpad_handler"
     SUFFIX ".exe"

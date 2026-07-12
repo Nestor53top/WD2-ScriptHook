@@ -1,12 +1,14 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <windows.h>
 #include <dbghelp.h>
+#include <psapi.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
 #pragma comment(lib, "dbghelp.lib")
+#pragma comment(lib, "psapi.lib")
 
 // ---------------------------------------------------------------------------
 // Configuration

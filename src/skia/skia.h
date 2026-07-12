@@ -45,6 +45,15 @@ typedef struct {
 } SkImageEntry;
 
 typedef struct {
+    int id;
+    int width, height;
+    ID3D11Texture2D* texture;
+    ID3D11RenderTargetView* rtv;
+    ID3D11ShaderResourceView* srv;
+    int isValid;
+} SkSurfaceEntry;
+
+typedef struct {
     ID3D11VertexShader* vertexShader;
     ID3D11PixelShader* pixelShader;
     ID3D11InputLayout* inputLayout;
@@ -69,6 +78,10 @@ typedef struct {
     int activeFont;
     SkImageEntry images[MAX_IMAGES];
     int imageCount;
+#define MAX_SURFACES 8
+    SkSurfaceEntry surfaces[MAX_SURFACES];
+    int surfaceCount;
+    int defaultWidth, defaultHeight;
 } WD2_RenderContext;
 
 WD2_RenderContext* skia_CreateRenderContext(ID3D11Device* dev, ID3D11DeviceContext* ctx, IDXGISwapChain* sc);
