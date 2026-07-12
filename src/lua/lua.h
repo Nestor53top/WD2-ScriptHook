@@ -115,9 +115,7 @@ void lua_xlua_rawseti(lua_State *L, int idx, int n);
 int lua_xlua_setmetatable(lua_State *L, int objindex);
 int lua_xlua_setfenv(lua_State *L, int idx);
 
-int lua_xlua_pcall(lua_State *L, int nargs, int nresults, int errfunc);
 int lua_xlua_cpcall(lua_State *L, lua_CFunction func, void *ud);
-int lua_xlua_load(lua_State *L, lua_Reader reader, void *data, const char *chunkname);
 
 int lua_xlua_next(lua_State *L, int idx);
 int lua_xlua_concat(lua_State *L, int n);
@@ -202,5 +200,3 @@ int lua_xlua_status(lua_State *L);
 #define lua_close(L) lua_xlua_close(L)
 #define lua_newthread(L) lua_xlua_newthread(L)
 #define lua_atpanic(L, f) lua_xlua_atpanic(L, f)
-
-#endif
