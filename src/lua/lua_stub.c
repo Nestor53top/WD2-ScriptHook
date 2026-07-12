@@ -1,6 +1,7 @@
 #include "lua.h"
 #include "lualib.h"
 #include "lauxlib.h"
+#include <string.h>
 
 lua_State *luaL_newstate(void) {
     return NULL;

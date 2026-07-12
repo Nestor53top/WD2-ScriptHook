@@ -1,5 +1,15 @@
 #pragma once
 
+#ifndef LUA_API
+#define LUA_API __declspec(dllimport)
+#endif
+#ifndef LUALIB_API
+#define LUALIB_API __declspec(dllimport)
+#endif
+#ifndef LUAI_API
+#define LUAI_API __declspec(dllimport)
+#endif
+
 #ifndef LUA_VERSION_NUM
 #define LUA_VERSION_NUM 501
 #define LUA_VERSION "5.1"
