@@ -5,6 +5,9 @@
 #endif
 
 #include <windows.h>
+#include <fileapi.h>
+#define CINTERFACE
+#define COBJMACROS
 #include <d3d11.h>
 #include <dxgi.h>
 #include <stdio.h>

@@ -112,6 +112,8 @@ void lua_pushstring(lua_State *L, const char *s) { (void)L; (void)s; }
 void lua_pushlstring(lua_State *L, const char *s, size_t len) { (void)L; (void)s; (void)len; }
 void lua_pushlightuserdata(lua_State *L, void *p) { (void)L; (void)p; }
 int lua_pushfstring(lua_State *L, const char *fmt, ...) { (void)L; (void)fmt; return 0; }
+void lua_pushcfunction(lua_State *L, lua_CFunction fn) { (void)L; (void)fn; }
+void lua_pushcclosure(lua_State *L, lua_CFunction fn, int n) { (void)L; (void)fn; (void)n; }
 void lua_pushthread(lua_State *L) { (void)L; }
 
 void lua_createtable(lua_State *L, int n, int r) { (void)L; (void)n; (void)r; }

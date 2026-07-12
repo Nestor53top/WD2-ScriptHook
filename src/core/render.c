@@ -1,3 +1,4 @@
+#define CINTERFACE
 #include "render.h"
 #include "hook_manager.h"
 #include <d3d11.h>
