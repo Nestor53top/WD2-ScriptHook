@@ -1,5 +1,6 @@
 #include "lua_engine.h"
 #include "script_loader.h"
+#include "game_api.h"
 
 static int lua_print_redirect(lua_State *L);
 static lua_State *g_luaState = NULL;
@@ -298,4 +299,9 @@ static int lua_print_redirect(lua_State *L) {
     }
     printf("\n");
     return 0;
+}
+
+void wd2_lua_register_api(void) {
+    if (!g_luaState) return;
+    wd2_game_api_register_all();
 }

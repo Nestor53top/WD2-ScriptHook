@@ -51,6 +51,7 @@ add_library(core SHARED
 target_include_directories(core PRIVATE
     src src/core src/lua src/minhook
 )
+target_compile_definitions(core PRIVATE LUA_BUILDING_LUA)
 target_link_libraries(core PRIVATE
     d3d11 dxgi shlwapi psapi dbghelp
     ws2_32 winmm version advapi32 shell32
@@ -72,7 +73,7 @@ add_library(skia SHARED
     src/skia/skia_surface.c
 )
 target_include_directories(skia PRIVATE src src/skia)
-target_link_libraries(skia PRIVATE d3d11 d3dcompiler dxgi shlwapi)
+target_link_libraries(skia PRIVATE d3d11 d3dcompiler dxgi dxguid shlwapi)
 set_target_properties(skia PROPERTIES
     OUTPUT_NAME "skia"
     PREFIX ""

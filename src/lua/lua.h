@@ -1,10 +1,19 @@
 #pragma once
 
 #ifndef LUA_API
+#ifdef LUA_BUILDING_LUA
+#define LUA_API __declspec(dllexport)
+#else
 #define LUA_API __declspec(dllimport)
 #endif
+#endif
+
 #ifndef LUALIB_API
+#ifdef LUA_BUILDING_LUA
+#define LUALIB_API __declspec(dllexport)
+#else
 #define LUALIB_API __declspec(dllimport)
+#endif
 #endif
 
 #ifndef LUA_VERSION_NUM
@@ -142,6 +151,26 @@ LUA_API int   luaL_error(lua_State *L, const char *fmt, ...);
 #define lua_tostring(L,idx) lua_tolstring(L,idx,NULL)
 #define lua_gettop(L) lua_gettop(L)
 #define lua_settop(L,idx) lua_settop(L,idx)
+
+#define lua_pop(L,n) lua_settop(L, -(n)-1)
+#define lua_newtable(L) lua_createtable(L, 0, 0)
+#define lua_getglobal(L,s) lua_getfield(L, LUA_GLOBALSINDEX, (s))
+#define lua_setglobal(L,s) lua_setfield(L, LUA_GLOBALSINDEX, (s))
+#define lua_isfunction(L,idx) (lua_type(L, idx) == LUA_TFUNCTION)
+#define lua_istable(L,idx) (lua_type(L, idx) == LUA_TTABLE)
+#define lua_islightuserdata(L,idx) (lua_type(L, idx) == LUA_TLIGHTUSERDATA)
+#define lua_isnil(L,idx) (lua_type(L, idx) == LUA_TNIL)
+#define lua_isnumber(L,idx) lua_isnumber(L, idx)
+#define lua_isstring(L,idx) lua_isstring(L, idx)
+#define lua_isboolean(L,idx) (lua_type(L, idx) == LUA_TBOOLEAN)
+#define lua_isuserdata(L,idx) (lua_type(L, idx) == LUA_TUSERDATA)
+#define lua_register(L,n,f) (lua_pushcfunction(L, f), lua_setglobal(L, (n)))
+#define lua_pushcfunction(L,f) lua_pushcfunction(L, f)
+#define lua_pushliteral(L, s) lua_pushlstring(L, s, sizeof(s)-1)
+#define lua_setfield(L,idx,k) lua_setfield(L, idx, k)
+#define lua_getfield(L,idx,k) lua_getfield(L, idx, k)
+#define lua_isnoneornil(L, n) (lua_type(L, (n)) <= LUA_TNIL)
+#define lua_tothread(L,idx) ((lua_State*)lua_touserdata(L, idx))
 
 /* Registry reference constants */
 #define LUA_NOREF       (-2)

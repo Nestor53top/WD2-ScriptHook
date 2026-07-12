@@ -1,8 +1,8 @@
 LIBRARY dinput8.dll
 
 EXPORTS
-    DirectInput8CreateA   @1
-    DllCanUnloadNow       @3
-    DllGetClassObject     @4
-    DllRegisterServer     @5
-    DllUnregisterServer   @6
+    DirectInput8CreateA   = Proxy_DirectInput8CreateA   @1
+    DllCanUnloadNow       = Proxy_DllCanUnloadNow       @3
+    DllGetClassObject     = Proxy_DllGetClassObject     @4
+    DllRegisterServer     = Proxy_DllRegisterServer     @5
+    DllUnregisterServer   = Proxy_DllUnregisterServer   @6
