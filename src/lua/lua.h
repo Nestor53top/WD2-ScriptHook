@@ -44,16 +44,14 @@ typedef struct lua_State lua_State;
 
 typedef int (*lua_CFunction)(lua_State *L);
 typedef void *(*lua_Alloc)(void *ud, void *ptr, size_t osize, size_t nsize);
+typedef const char *(*lua_Reader)(lua_State *L, void *ud, size_t *sz);
+typedef int (*lua_Writer)(lua_State *L, const void *p, size_t sz, void *ud);
 
 #define lua_assert(exp) ((void)0)
 
-void lua_xlua_call(lua_State *L, int nargs, int nresults);
 int lua_xlua_pcall(lua_State *L, int nargs, int nresults, int errfunc);
 int lua_xlua_load(lua_State *L, lua_Reader reader, void *data, const char *chunkname);
 int lua_xlua_newchunk(lua_State *L, lua_Writer writer, void *data);
-
-typedef const char *(*lua_Reader)(lua_State *L, void *ud, size_t *sz);
-typedef int (*lua_Writer)(lua_State *L, const void *p, size_t sz, void *ud);
 
 lua_State *lua_xlua_newstate(lua_Alloc f, void *ud);
 void lua_xlua_close(lua_State *L);
@@ -117,7 +115,6 @@ void lua_xlua_rawseti(lua_State *L, int idx, int n);
 int lua_xlua_setmetatable(lua_State *L, int objindex);
 int lua_xlua_setfenv(lua_State *L, int idx);
 
-int lua_xlua_call(lua_State *L, int nargs, int nresults);
 int lua_xlua_pcall(lua_State *L, int nargs, int nresults, int errfunc);
 int lua_xlua_cpcall(lua_State *L, lua_CFunction func, void *ud);
 int lua_xlua_load(lua_State *L, lua_Reader reader, void *data, const char *chunkname);

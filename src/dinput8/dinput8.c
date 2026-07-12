@@ -1,8 +1,10 @@
 #include "dinput8.h"
 #include <shlwapi.h>
+#include <psapi.h>
 #include <time.h>
 
 #pragma comment(lib, "shlwapi.lib")
+#pragma comment(lib, "psapi.lib")
 
 // Real DInput8 function pointers
 DirectInput8Create_t Real_DirectInput8Create = NULL;
@@ -187,8 +189,8 @@ DWORD WINAPI DInput8InitThread(LPVOID param)
     // Call PreInit_DInput first
     if (CorePreInit_DInput) {
         DInput8Log("Init thread: calling PreInit_DInput()...");
-        int result = CorePreInit_DInput();
-        DInput8Log("Init thread: PreInit_DInput returned %d", result);
+        CorePreInit_DInput();
+        DInput8Log("Init thread: PreInit_DInput returned");
     } else {
         DInput8Log("Init thread: PreInit_DInput export not found, skipping.");
     }
@@ -196,8 +198,8 @@ DWORD WINAPI DInput8InitThread(LPVOID param)
     // Call Init if available
     if (CoreInit) {
         DInput8Log("Init thread: calling Init()...");
-        int result = CoreInit();
-        DInput8Log("Init thread: Init returned %d", result);
+        CoreInit();
+        DInput8Log("Init thread: Init returned");
     }
 
     // Poll for game readiness, then call PostInit
@@ -218,8 +220,8 @@ DWORD WINAPI DInput8InitThread(LPVOID param)
 
     if (CorePostInit) {
         DInput8Log("Init thread: calling PostInit()...");
-        int result = CorePostInit();
-        DInput8Log("Init thread: PostInit returned %d", result);
+        CorePostInit();
+        DInput8Log("Init thread: PostInit returned");
     } else {
         DInput8Log("Init thread: PostInit export not found, skipping.");
     }
