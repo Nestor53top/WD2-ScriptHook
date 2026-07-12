@@ -1,6 +1,7 @@
 #include "lua_engine.h"
 #include "script_loader.h"
 
+static int lua_print_redirect(lua_State *L);
 static lua_State *g_luaState = NULL;
 static WD2_SCRIPT_ENTRY g_scripts[WD2_MAX_SCRIPTS];
 static int g_scriptCount = 0;
@@ -284,7 +285,7 @@ void wd2_lua_hot_reload_check(void) {
     }
 }
 
-int lua_print_redirect(lua_State *L) {
+static int lua_print_redirect(lua_State *L) {
     int n = lua_gettop(L);
     const char *sep = "";
     for (int i = 1; i <= n; i++) {

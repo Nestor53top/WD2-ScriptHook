@@ -143,6 +143,49 @@ LUA_API int   luaL_error(lua_State *L, const char *fmt, ...);
 #define lua_gettop(L) lua_gettop(L)
 #define lua_settop(L,idx) lua_settop(L,idx)
 
+/* Registry reference constants */
+#define LUA_NOREF       (-2)
+#define LUA_REFNIL      (-1)
+
+/* Hook constants */
+#define LUA_MASKCALL    (1 << 0)
+#define LUA_MASKRET     (1 << 1)
+#define LUA_MASKLINE    (1 << 2)
+#define LUA_MASKCOUNT   (1 << 3)
+
+/* Debug structure */
+typedef struct lua_Debug {
+    int event;
+    const char *name;
+    const char *namewhat;
+    const char *what;
+    const char *source;
+    int currentline;
+    int nups;
+    int linedefined;
+    int lastlinedefined;
+    char short_src[60];
+    int istailcall;
+    char short_src_padding[32]; /* extra padding for safety */
+} lua_Debug;
+
+typedef struct lua_VarInfo {
+    const char *name;
+    const char *namewhat;
+} lua_VarInfo;
+
+/* Debug API */
+LUA_API int   lua_getstack(lua_State *L, int level, lua_Debug *ar);
+LUA_API int   lua_getinfo(lua_State *L, const char *what, lua_Debug *ar);
+LUA_API const char *lua_getlocal(lua_State *L, const lua_Debug *ar, int n);
+LUA_API const char *lua_setlocal(lua_State *L, const lua_Debug *ar, int n);
+LUA_API const char *lua_getupvalue(lua_State *L, int funcindex, int n);
+LUA_API const char *lua_setupvalue(lua_State *L, int funcindex, int n);
+LUA_API int   lua_sethook(lua_State *L, int (*func)(lua_State *, lua_Debug *), int mask, int count);
+LUA_API int   lua_gethook(lua_State *L);
+LUA_API int   lua_gethookmask(lua_State *L);
+LUA_API int   lua_gethookcount(lua_State *L);
+
 /* Standard library openers */
 LUALIB_API lua_State *luaL_newstate(void);
 LUALIB_API void luaL_openlibs(lua_State *L);
