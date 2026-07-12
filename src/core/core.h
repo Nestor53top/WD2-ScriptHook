@@ -105,9 +105,9 @@ void wd2_scripts_get_list(char *buf, int bufsize);
 void wd2_crash_init(void);
 void wd2_crash_shutdown(void);
 
-void Init(void);
-void PostInit(void);
-void PreInit_DInput(void);
+__declspec(dllexport) void __cdecl Init(void);
+__declspec(dllexport) void __cdecl PostInit(void);
+__declspec(dllexport) void __cdecl PreInit_DInput(void);
 void ProperShutdown(void);
 
 void wd2_game_api_register_all(void);

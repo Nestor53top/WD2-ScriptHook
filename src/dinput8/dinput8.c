@@ -17,9 +17,9 @@ static HANDLE g_hInitThread = NULL;
 static BOOL g_bDllAttached = FALSE;
 
 // core.dll export types
-typedef int  (*CoreInit_t)(void);
-typedef int  (*CorePostInit_t)(void);
-typedef int  (*CorePreInit_DInput_t)(void);
+typedef void (*CoreInit_t)(void);
+typedef void (*CorePostInit_t)(void);
+typedef void (*CorePreInit_DInput_t)(void);
 
 static CoreInit_t CoreInit = NULL;
 static CorePostInit_t CorePostInit = NULL;
