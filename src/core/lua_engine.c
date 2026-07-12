@@ -2,6 +2,14 @@
 #include "script_loader.h"
 #include "game_api.h"
 
+static BOOL wd2_get_file_time(const char *path, FILETIME *ft) {
+    HANDLE h = CreateFileA(path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+    if (h == INVALID_HANDLE_VALUE) return FALSE;
+    BOOL ok = GetFileTime(h, NULL, NULL, ft);
+    CloseHandle(h);
+    return ok;
+}
+
 static int lua_print_redirect(lua_State *L);
 static lua_State *g_luaState = NULL;
 static WD2_SCRIPT_ENTRY g_scripts[WD2_MAX_SCRIPTS];
@@ -155,7 +163,7 @@ BOOL wd2_lua_load_script(const char *path) {
         const char *fname = strrchr(path, '\\');
         if (!fname) fname = strrchr(path, '/');
         strncpy(entry->szName, fname ? fname + 1 : path, sizeof(entry->szName) - 1);
-        GetFileTime(path, &entry->ftLastWrite);
+        wd2_get_file_time(path, &entry->ftLastWrite);
         entry->bLoaded = TRUE;
         entry->iRef = LUA_NOREF;
         g_scriptCount++;
@@ -272,7 +280,7 @@ void wd2_lua_hot_reload_check(void) {
         if (!g_scripts[i].bLoaded) continue;
 
         FILETIME ftNew;
-        if (GetFileTime(g_scripts[i].szPath, &ftNew)) {
+        if (wd2_get_file_time(g_scripts[i].szPath, &ftNew)) {
             if (CompareFileTime(&ftNew, &g_scripts[i].ftLastWrite) > 0) {
                 wd2_log_info("Script changed, reloading: %s", g_scripts[i].szName);
                 if (g_scripts[i].iRef != LUA_NOREF) {
