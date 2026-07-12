@@ -34,6 +34,10 @@
 #define WD2_MAX_PATH_LEN 260
 #define WD2_LOG_BUFFER_SIZE 4096
 
+#ifndef SAFE_RELEASE
+#define SAFE_RELEASE(p) do { if (p) { (p)->lpVtbl->Release(p); (p) = NULL; } } while(0)
+#endif
+
 typedef struct _WD2_SCRIPTHOOK_CTX {
     HMODULE         hGameModule;
     lua_State      *L;

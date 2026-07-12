@@ -53,8 +53,8 @@ target_include_directories(core PRIVATE
 )
 target_compile_definitions(core PRIVATE LUA_BUILDING_LUA)
 target_link_libraries(core PRIVATE
-    d3d11 dxgi shlwapi psapi dbghelp
-    ws2_32 winmm version advapi32 shell32
+    d3d11 d3dcompiler dxgi dxguid shlwapi psapi dbghelp
+    ws2_32 winmm version advapi32 shell32 ole32
 )
 set_target_properties(core PROPERTIES
     OUTPUT_NAME "core"
@@ -84,7 +84,7 @@ set_target_properties(skia PROPERTIES
 # ============================================================
 # crashpad_handler.exe - Crash handler
 # ============================================================
-add_executable(crashpad_handler WIN32
+add_executable(crashpad_handler
     src/crashpad/main.c
 )
 target_include_directories(crashpad_handler PRIVATE src src/crashpad)
