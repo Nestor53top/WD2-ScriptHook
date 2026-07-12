@@ -49,7 +49,7 @@ static void wd2_scripts_scan_dir(const char *dir, int depth) {
                 LOADED_SCRIPT *s = &g_loadedScripts[g_loadedCount];
                 strncpy(s->szPath, full, MAX_PATH - 1);
                 strncpy(s->szName, fd.cFileName, sizeof(s->szName) - 1);
-                GetFileTimeA(full, &s->ftLastWrite);
+                GetFileTime(full, &s->ftLastWrite);
                 s->bLoaded = FALSE;
                 g_loadedCount++;
             }

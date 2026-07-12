@@ -155,7 +155,7 @@ BOOL wd2_lua_load_script(const char *path) {
         const char *fname = strrchr(path, '\\');
         if (!fname) fname = strrchr(path, '/');
         strncpy(entry->szName, fname ? fname + 1 : path, sizeof(entry->szName) - 1);
-        GetFileTimeA(path, &entry->ftLastWrite);
+        GetFileTime(path, &entry->ftLastWrite);
         entry->bLoaded = TRUE;
         entry->iRef = LUA_NOREF;
         g_scriptCount++;
@@ -272,7 +272,7 @@ void wd2_lua_hot_reload_check(void) {
         if (!g_scripts[i].bLoaded) continue;
 
         FILETIME ftNew;
-        if (GetFileTimeA(g_scripts[i].szPath, &ftNew)) {
+        if (GetFileTime(g_scripts[i].szPath, &ftNew)) {
             if (CompareFileTime(&ftNew, &g_scripts[i].ftLastWrite) > 0) {
                 wd2_log_info("Script changed, reloading: %s", g_scripts[i].szName);
                 if (g_scripts[i].iRef != LUA_NOREF) {
