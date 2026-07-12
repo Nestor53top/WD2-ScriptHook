@@ -32,8 +32,8 @@ typedef void  (__fastcall *SetVehicleLicensePlateText_t)(int entityId, const cha
 typedef void  (__fastcall *SetVehicleLightBehaviorFlag_t)(int entityId, int flag, BOOL enable);
 typedef int   (__fastcall *GetVehiclePartCount_t)(int entityId);
 typedef int   (__fastcall *GetVehiclePartHash_t)(int entityId, int partIndex);
-typedef void  (__fastcall *GetVehiclePartPosition_t)(int entityId, int partIndex, float *x, float *y, float *z));
-typedef void  (__fastcall *GetVehiclePartRotation_t)(int entityId, int partIndex, float *x, float *y, float *z));
+typedef void  (__fastcall *GetVehiclePartPosition_t)(int entityId, int partIndex, float *x, float *y, float *z);
+typedef void  (__fastcall *GetVehiclePartRotation_t)(int entityId, int partIndex, float *x, float *y, float *z);
 typedef void  (__fastcall *SetVehiclePartPosition_t)(int entityId, int partIndex, float x, float y, float z);
 typedef void  (__fastcall *SetVehiclePartRotation_t)(int entityId, int partIndex, float x, float y, float z);
 typedef void  (__fastcall *PutPlayerInVehicleDelayed_t)(int entityId, float delay);

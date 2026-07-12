@@ -205,7 +205,7 @@ void ProperShutdown(void) {
 }
 
 BOOL APIENTRY DllMain(HMODULE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
-    (void)lp_reserved;
+    (void)lpReserved;
     switch (fdwReason) {
     case DLL_PROCESS_ATTACH:
         DisableThreadLibraryCalls(hinstDLL);
