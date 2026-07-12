@@ -1,7 +1,6 @@
 #include "skia.h"
 #include <d3dcompiler.h>
-#include <string.h>
-#include <stdlib.h>
+#include <math.h>
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -11,28 +10,6 @@ typedef struct {
     float x, y, z;
     float r, g, b, a;
 } Vertex;
-
-typedef struct {
-    ID3D11VertexShader* vertexShader;
-    ID3D11PixelShader* pixelShader;
-    ID3D11InputLayout* inputLayout;
-    ID3D11Buffer* vertexBuffer;
-    ID3D11Buffer* indexBuffer;
-    ID3D11Buffer* constantBuffer;
-    ID3D11BlendState* blendState;
-    ID3D11RasterizerState* rasterizerState;
-    ID3D11DepthStencilState* depthStencilState;
-    ID3D11SamplerState* samplerState;
-    ID3D11Texture2D* fontTexture;
-    ID3D11ShaderResourceView* fontTextureSRV;
-    ID3D11RenderTargetView* renderTargetView;
-    ID3D11Device* device;
-    ID3D11DeviceContext* context;
-    IDXGISwapChain* swapChain;
-    int width, height;
-    int vertexCount, indexCount;
-    int vertexBufferCapacity;
-} WD2_RenderContext;
 
 static const char* vertexShaderSrc =
     "cbuffer ConstBuffer : register(b0) {\n"
